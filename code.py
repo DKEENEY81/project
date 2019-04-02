@@ -18,19 +18,26 @@ Cases[['dateArgument','dateRearg']]=Cases[['dateArgument', 'dateRearg']].notnull
 
 # Cases.groupby('respondent').count()
 
-Cases[['petitionerState', 'respondentState']] = Cases[['petitionerState','respondentState']].fillna(value=0.0)
+Cases[['petitionerState','adminActionState','threeJudgeFdc','respondentState']] = Cases[['petitionerState','adminActionState','threeJudgeFdc','respondentState',]].fillna(value=0.0)
+Cases['respondent'] = Cases[['respondent']].fillna(value=501)
+Cases['adminAction'] = Cases[['adminAction']].fillna(value=118.0)
+# There was already a code for unidentfiable which i reused for NaN here, 0s for other meaning not specified
 
 # Cases.info()
 
 
-Cases[Cases['respondent'].isnull()]
-Cases['respondent'] = Cases[['respondent']].fillna(value=501) # There was already a code for unidentfiable which i reused for NaN here
+# Cases[Cases['respondent'].isnull()]
+ 
 
 #Casting as int32, not sure if this is beneficial or not
 
 Cases.respondent = Cases.respondent.astype(int)
 Cases.petitionerState = Cases.petitionerState.astype(int)
 Cases.petitioner = Cases.petitioner.astype(int)
+Cases.respondentState = Cases.respondentState.astype(int)
+Cases.adminAction = Cases.adminAction.astype(int)
+Cases.adminActionState = Cases.adminActionState.astype(int)
+Cases.jurisdiction = Cases.jurisdiction.astype(int)
 
 
 #Cases.info()
